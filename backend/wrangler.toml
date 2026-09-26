@@ -29,7 +29,7 @@ run_worker_first = ["/api/*", "/ws/*", "/internal/*", "/v1/*", "/_deepspace/*", 
 [vars]
 # Beta admission cap, enforced server-side for every channel.
 BETA_MAX_USERS = "100"
-DEEPSPACE_APP_ID = "__APP_ID__"
+DEEPSPACE_APP_ID = "app_01M3G246NJJQ6WQS6TPYH5XRG8"
 APP_NAME = "plans-around-us"
 
 [[migrations]]
