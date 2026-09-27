@@ -1,0 +1,14 @@
+# TLS for the agent's website API. Caddy gets and renews the certificate for {$DOMAIN}.
+{$DOMAIN} {
+	encode zstd gzip
+
+	@agent path /api/* /healthz
+	handle @agent {
+		reverse_proxy agent:8080
+	}
+
+	# The website itself stays on Vercel.
+	handle {
+		respond "Not found" 404
+	}
+}

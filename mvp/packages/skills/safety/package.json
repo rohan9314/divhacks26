@@ -1,0 +1,12 @@
+{
+  "name": "@mvp/skill-safety",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@mvp/core": "*",
+    "zod": "^4.6.5"
+  }
+}

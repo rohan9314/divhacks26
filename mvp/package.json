@@ -1,0 +1,32 @@
+{
+  "name": "around-me-mvp",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "workspaces": [
+    "packages/core",
+    "packages/accounts",
+    "packages/router",
+    "packages/skills/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "tsx apps/agent/src/main.ts",
+    "start": "tsx apps/agent/src/main.ts",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "db:migrate": "tsx apps/agent/src/migrate.ts"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.14",
+    "@types/node": "^26.6.3",
+    "@types/pg": "^8.23.1",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "vitest": "^3.2.4"
+  }
+}

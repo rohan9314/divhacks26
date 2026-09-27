@@ -203,7 +203,7 @@ export class AccountOnboardingStore {
         ...prev,
         ...row,
         userId: row.userId || prev?.userId,
-        photonSenderId: row.photonSenderId || prev?.photonSenderId,
+        photonSenderId: row.photonSenderId || prev?.photonSenderId || row.photonSenderId,
         customerName: preferredDisplayName(row.customerName, prev?.customerName, row.customerId),
         xrplAddress: row.xrplAddress || prev?.xrplAddress,
         createdAt: prev?.createdAt ?? row.createdAt,

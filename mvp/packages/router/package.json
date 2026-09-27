@@ -1,0 +1,14 @@
+{
+  "name": "@mvp/router",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@langchain/core": "^1.2.13",
+    "@langchain/langgraph": "^1.4.18",
+    "@mvp/core": "*",
+    "zod": "^4.6.5"
+  }
+}

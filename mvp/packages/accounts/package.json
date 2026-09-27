@@ -1,0 +1,15 @@
+{
+  "name": "@mvp/accounts",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./testing": "./src/testing.ts"
+  },
+  "dependencies": {
+    "@mvp/core": "*"
+  },
+  "devDependencies": {
+    "dotenv": "^18.0.4"
+  }
+}
