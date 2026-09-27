@@ -20,6 +20,24 @@ jobs:
       - run: npx vitest run test/web.test.ts
       - run: docker build --tag boroughos-agent:test .
 
+  mvp:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mvp
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: mvp/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm test
+      - run: docker build --tag around-me-mvp:test .
+
   deepspace-backend:
     runs-on: ubuntu-latest
     defaults:

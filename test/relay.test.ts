@@ -37,7 +37,7 @@ describe("relay parsing", () => {
 
 describe("relay send", () => {
   it("texts the person over Photon and acks the host", async () => {
-    const sendMessage = vi.fn(async () => undefined);
+    const sendMessage = vi.fn(async (_to: string, _body: string) => undefined);
     const result = await handleRelay({
       text: "text Rohan that we're at Katz's",
       senderId: "alan-id",
@@ -54,7 +54,7 @@ describe("relay send", () => {
   });
 
   it("does not claim a send when they have no Photon id", async () => {
-    const sendMessage = vi.fn(async () => undefined);
+    const sendMessage = vi.fn(async (_to: string, _body: string) => undefined);
     const result = await handleRelay({
       text: "message Keith we're downstairs",
       senderId: "alan-id",
@@ -69,7 +69,7 @@ describe("relay send", () => {
   });
 
   it("still texts Rohan when Keith is in Tiger without a Photon id", async () => {
-    const sendMessage = vi.fn(async () => undefined);
+    const sendMessage = vi.fn(async (_to: string, _body: string) => undefined);
     const result = await handleRelay({
       text: "text Rohan that the table is ready",
       senderId: "alan-id",
@@ -95,7 +95,7 @@ describe("relay send", () => {
 describe("relay turn", () => {
   it("sends before Gemini replies", async () => {
     const replies: string[] = [];
-    const sendMessage = vi.fn(async () => undefined);
+    const sendMessage = vi.fn(async (_to: string, _body: string) => undefined);
     const outcome = await runConversationTurn(
       {
         spaceId: "dm-alan",

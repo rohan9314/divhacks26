@@ -38,7 +38,7 @@ export interface SuggestInput {
   /** How the sender and group are feeling and texting right now. */
   social?: SocialRead;
   /** Tiger-backed people directory: names, stable user ids, and public Testnet wallets only. */
-  peopleDirectory?: Array<{ displayName?: string; userId?: string; xrplAddress?: string }>;
+  peopleDirectory?: Array<{ displayName?: string; userId?: string; xrplAddress?: string; imessage?: string }>;
   /** Authenticated identity and public wallet metadata from Tiger. */
   userProfile?: { userId: string; displayName?: string; walletAddress: string; backboardLinked: boolean };
   /** Receives the Tiger report when the user asked about safety. */

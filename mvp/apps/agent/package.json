@@ -1,0 +1,15 @@
+{
+  "name": "@mvp/agent",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@mvp/core": "*",
+    "@mvp/router": "*",
+    "@mvp/skill-events": "*",
+    "@mvp/skill-food": "*",
+    "@mvp/skill-route": "*",
+    "@mvp/skill-safety": "*",
+    "dotenv": "^18.0.4",
+    "spectrum-ts": "^12.10.1"
+  }
+}

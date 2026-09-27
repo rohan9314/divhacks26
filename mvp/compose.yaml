@@ -1,0 +1,32 @@
+# Around Me MVP on the DigitalOcean droplet: `docker compose -f mvp/compose.yaml up -d --build`.
+# Exactly one agent instance may run: Photon delivers each message to every listener.
+name: around-me-mvp
+
+services:
+  agent:
+    build:
+      context: .
+      args:
+        GIT_SHA: ${GIT_SHA:-dev}
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      CHAT_PROVIDER: photon
+      HEALTH_PORT: 8080
+    expose:
+      - "8080"
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:8080/healthz').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # One-off: `docker compose -f mvp/compose.yaml run --rm migrate`
+  migrate:
+    image: postgres:17-alpine
+    profiles: ["tools"]
+    env_file: .env
+    volumes:
+      - ./sql:/sql:ro
+    entrypoint: ["sh", "-c", "for f in /sql/*.sql; do echo \"Applying $$f\"; psql \"$$DATABASE_URL\" -v ON_ERROR_STOP=1 -f \"$$f\" || exit 1; done"]

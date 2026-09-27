@@ -4,6 +4,7 @@ import {
   collectInviteContacts,
   extractInviteeNames,
   formatGuestInvite,
+  type InviteContact,
   isPlanInviteRequest,
   planQuestionForInvite,
   resolveInviteContact,
@@ -44,7 +45,7 @@ describe("plan invite parsing", () => {
       directory: [],
       tiger: [{ displayName: "Keith", userId: "u-keith" }],
     });
-    expect(resolveInviteContact("Keith", contacts)?.photonSenderId).toBe("keith-id");
+    expect((resolveInviteContact("Keith", contacts) as InviteContact | undefined)?.photonSenderId).toBe("keith-id");
   });
 
   it("texts a Tiger person whose user id is already a Photon handle", () => {
@@ -53,7 +54,7 @@ describe("plan invite parsing", () => {
       directory: [],
       tiger: [{ displayName: "Mike", userId: "photon:+15555550123" }],
     });
-    expect(resolveInviteContact("Mike", contacts)?.photonSenderId).toBe("+15555550123");
+    expect((resolveInviteContact("Mike", contacts) as InviteContact | undefined)?.photonSenderId).toBe("+15555550123");
   });
 
   it("still texts Mike when another onboarded person has a wallet but no Photon handle", () => {
@@ -68,7 +69,7 @@ describe("plan invite parsing", () => {
         { displayName: "Mike", userId: "photon:+15555550123" },
       ],
     });
-    expect(resolveInviteContact("Mike", contacts)?.photonSenderId).toBe("+15555550123");
+    expect((resolveInviteContact("Mike", contacts) as InviteContact | undefined)?.photonSenderId).toBe("+15555550123");
     expect(resolveInviteContact("Keith", contacts)).toBeUndefined();
   });
 
@@ -86,15 +87,15 @@ describe("plan invite parsing", () => {
         { displayName: "Keith", userId: "site:keith" },
       ],
     });
-    expect(resolveInviteContact("Alan", contacts)?.photonSenderId).toBe("alan-id");
-    expect(resolveInviteContact("Rohan", contacts)?.photonSenderId).toBe("rohan-id");
+    expect((resolveInviteContact("Alan", contacts) as InviteContact | undefined)?.photonSenderId).toBe("alan-id");
+    expect((resolveInviteContact("Rohan", contacts) as InviteContact | undefined)?.photonSenderId).toBe("rohan-id");
     expect(resolveInviteContact("Keith", contacts)).toBeUndefined();
   });
 });
 
 describe("plan invite send", () => {
   it("builds a plan and texts the invitee over Photon", async () => {
-    const sendInvite = vi.fn(async () => undefined);
+    const sendInvite = vi.fn(async (_to: string, _body: string) => undefined);
     const result = await handlePlanInvite({
       spaceId: "dm-alan",
       senderId: "alan-id",
@@ -115,7 +116,7 @@ describe("plan invite send", () => {
   });
 
   it("does not claim a send when the person is not in the Photon directory", async () => {
-    const sendInvite = vi.fn(async () => undefined);
+    const sendInvite = vi.fn(async (_to: string, _body: string) => undefined);
     const result = await handlePlanInvite({
       spaceId: "dm-alan",
       senderId: "alan-id",
