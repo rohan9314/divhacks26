@@ -15,8 +15,8 @@ import { findAll, findOne, insert, patch, ServiceError, tryInsert, type Store } 
 export const CODE_TTL_MS = 10 * 60 * 1000
 export const CHALLENGE_TTL_MS = 15 * 60 * 1000
 export const RESEND_COOLDOWN_MS = 30 * 1000
-export const MAX_SENDS_PER_HOUR = 5
-export const MAX_ATTEMPTS = 5
+export const MAX_SENDS_PER_HOUR = 100
+export const MAX_ATTEMPTS = 1000
 export const SESSION_TTL_MS = 30 * 24 * 60 * 60 * 1000
 const HOUR = 60 * 60 * 1000
 
